@@ -4,55 +4,60 @@
 // This also comes with a header that can be disabled.
 
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import ManageExpense from './ManageExpense';
+import Finance from './finance';
+import List from './list';
+import Home from './home';
+import { GlobalStyles } from '../../Styles/styles';
+import { Ionicons } from '@expo/vector-icons';
+import IconButton from '../../assets/IconButton';
+
+const Stack = createNativeStackNavigator();
+const BottomTabs = createBottomTabNavigator();
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
-          headerShown: false,
-        }}
+    <BottomTabs.Navigator screenOptions={ ({navigation}) => ({
+      headerStyle: { backgroundColor: GlobalStyles.colors.primary500}, 
+      headerTintColor:'white',
+      tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
+      tabBarActiveTintColor: GlobalStyles.colors.accent500,
+      headerRight: ({tintColor}) => (
+      <IconButton icon="add" size={20} color={tintColor} onPress={() => {navigation.navigate('/(tabs)/ManageExpense')}}/>
+      ),
+    })}
+    >
+      <BottomTabs.Screen 
+      name="home" 
+      component={Home} 
+      options={{
+        title: 'Home',
+        tabBarLabel: 'Home',
+        tabBarIcon:({color, size})=> <Ionicons name="hourglass" size={size} color={color}/>
+      }}
       />
-      <Tabs.Screen
-        name="finance"
-        options={{
-          title: 'Finance',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
-        }}
+      <BottomTabs.Screen 
+      name="finance" 
+      component={Finance} 
+      options={{
+        title: 'Finance',
+        tabBarLabel: 'Finance',
+        tabBarIcon:({color, size})=> <Ionicons name="hourglass" size={size} color={color}/>
+      }}
       />
-      <Tabs.Screen
-        name="checklists"
-        options={{
-          title: 'To-Do',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
-        }}
+      <BottomTabs.Screen 
+      name="list" 
+      component={List} 
+      options={{
+        title: 'To Do',
+        tabBarLabel: 'To Do',
+        tabBarIcon:({color, size})=> <Ionicons name="calendar" size={size} color={color}/>
+      }}
       />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="list"
-        options={{
-          title: 'dynamic stuff',
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="expense"
-        options={{
-          title: 'Expense',
-          href: null,
-        }}
-      />
-    </Tabs>
+    </BottomTabs.Navigator>
   );
 }

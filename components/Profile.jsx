@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
         width: 30,
         borderRadius: 15,
         marginTop: 70,
-        backgroundColor: '#ddd',
+        backgroundColor: '#007bff',
         alignItems: 'center',
     },
     plus:{
         fontSize: 20,
+        color: "white"
     },
     name:{
         paddingTop: 7,

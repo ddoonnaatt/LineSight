@@ -4,6 +4,7 @@
 
 import React from 'react';
 import {StyleSheet, View, Text, Image, Pressable} from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
     container:{
@@ -13,10 +14,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         height: 60,
     },
-    icon:{
-        height: 35,
-        width: 35,
-    },
     texts:{
         flex: 1,
         paddingLeft: 30,
@@ -24,6 +21,7 @@ const styles = StyleSheet.create({
     main:{
         fontSize: 16,
         paddingTop: 6,
+        color: '#000',
     },
     sub:{
         fontSize: 10,
@@ -34,12 +32,12 @@ const styles = StyleSheet.create({
 // icon addresses have to be declared first and the corresponding item number must be used in Settings.jsx
 function SettingRow({ text, mintext, type, imgsrc}){
     var icons = [
-        require('../assets/temp.png'),
+        "cog", "eye", "language", "arrow-left", "info", "question", "bookmark", "globe"
     ]
 
     return (
         <Pressable style={styles.container}>
-            <Image source={icons[imgsrc]} style={styles.icon} />
+            <FontAwesome size={30} name={icons[imgsrc]} style={({color:"#007bff",})} />
             <View style={styles.texts}>
                 <Text style={styles.main}>{text}</Text>
                 <Text style={styles.sub}>{mintext}</Text>

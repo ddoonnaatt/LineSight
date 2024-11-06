@@ -1,2 +1,2 @@
 # LineSight
-React app for time and finance management 
+App for time and finance management (made with React)
